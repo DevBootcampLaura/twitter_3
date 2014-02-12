@@ -1,3 +1,4 @@
+
 def job_is_complete(jid)
   waiting = Sidekiq::Queue.new
   working = Sidekiq::Workers.new

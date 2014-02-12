@@ -1,15 +1,15 @@
 $(document).ready(function() {
   $('#form').submit(function(e) {
     e.preventDefault();
-    // var tweet = {tweet_text: $("#tweet_text").val()};
-    // $('#tweet_text').prop('disabled', true);
-    // $(".container").append("<img id='balls' src='ajax-loader.gif'/>")
+    var tweet = {status: $("#status").val()};
+    $('#status').prop('disabled', true);
+    $(".container").append("<img id='balls' src='ajax-loader.gif'/>")
     $.ajax({
       type: "POST",
       url: "/ajax_tweet",
-      // data: tweet,
+      data: tweet,
       success: function(response){
-        console.log(response.job_id);
+        // console.log(response.job_id);
         // site = "/status/" + response;
         window.location.href = "/status/" + response.job_id;
 

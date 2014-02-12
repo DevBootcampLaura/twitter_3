@@ -34,14 +34,14 @@ post '/ajax_tweet' do
   user = User.find_by_username(session[:username])
 
   job_id = user.tweet(params[:status])
-
   content_type :json
   {job_id: job_id}.to_json
+
 end
 
 get '/status/:job_id' do
   puts 'We got here'
   result = job_is_complete(params[:job_id])
-  erb :index if result
+  puts result
 
 end

@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
   # end
 
   def tweet(status)
-    tweet = tweets.create!(:status => status)
+
+    tweet = Tweet.create!(:status => status)
+    self.tweets << tweet
+    puts "IN USER TWEET method"
     TweetWorker.perform_async(tweet.id)
   end
 
