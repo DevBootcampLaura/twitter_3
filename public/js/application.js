@@ -1,3 +1,19 @@
+
+        function check_status(data){
+        //get the status from /status/:job_id
+          $.get("/status/" + data, function(response){
+            if(response==="true"){
+              alert("woohoo!");
+              // clearInterval(timer);
+            }else{
+              setTimeout(check_status(response.job_id), 1);
+            }
+
+          });
+        }
+
+
+
 $(document).ready(function() {
   $('#form').submit(function(e) {
     e.preventDefault();
@@ -9,16 +25,25 @@ $(document).ready(function() {
       url: "/ajax_tweet",
       data: tweet,
       success: function(response){
-        // console.log(response.job_id);
-        // site = "/status/" + response;
-        window.location.href = "/status/" + response.job_id;
+        $("#balls").remove();
+        $('#success').html("<h1>Please wait while we process your tweet.</h1>")
+        check_status(response.job_id)
 
-        // $("#balls").remove();
-        // $("#success").html("<h1>"+response+"</h1>").fadeIn(500);
-        // $("#success").delay(2000).fadeOut(500);
-        // $('#tweet_text').prop('disabled', false);
-        // $('#tweet_text').val("");
       }
     });
   });
 });
+
+
+
+
+// I want to get the result every second and see whether it is true or false
+// var timer = setTimeout(check_status, 1000)
+
+// function check_status(){
+// //get the status from /status/:job_id
+//   $.get("/status/" + response, function(data){
+//     alert(data);
+//   });
+// }
+
