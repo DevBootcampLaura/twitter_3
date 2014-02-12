@@ -2,11 +2,12 @@
         function check_status(data){
         //get the status from /status/:job_id
           $.get("/status/" + data, function(response){
+            console.log(response)
             if(response==="true"){
               alert("woohoo!");
               // clearInterval(timer);
             }else{
-              setTimeout(check_status(response.job_id), 1);
+              setTimeout(check_status(data), 1000);
             }
 
           });
@@ -25,6 +26,7 @@ $(document).ready(function() {
       url: "/ajax_tweet",
       data: tweet,
       success: function(response){
+        console.log(response)
         $("#balls").remove();
         $('#success').html("<h1>Please wait while we process your tweet.</h1>")
         check_status(response.job_id)

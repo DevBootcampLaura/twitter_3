@@ -40,7 +40,7 @@ post '/ajax_tweet' do
 end
 
 get '/status/:job_id' do
-
+  puts "JOB ID: #{params[:job_id]}"
   result = job_is_complete(params[:job_id])
   result.to_s
   # content_type :json
